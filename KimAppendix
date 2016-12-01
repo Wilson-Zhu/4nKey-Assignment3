@@ -104,7 +104,6 @@ SELECT GENRE_NAME FROM GENRE_T
 JOIN GENRE_WATCHABLE_T ON GENRE_T.GENREID=GENRE_WATCHABLE_T.GENREID JOIN WATCHABLE_T ON GENRE_WATCHABLE_T.WATCHABLEID=WATCHABLE_T.WATCHABLEID WHERE WATCHABLE_NAME='ZOOTOPIA';
 ERROR: Needed another join 
 
-
 B7. How many movies or tv shows each genre has? The SQL statement should show that "Horror" and "Sport" have zero associated movies and tv shows. 
 
 SELECT GENRE_NAME, count(WATCHABLE_T.WATCHABLEID) AS CNT
