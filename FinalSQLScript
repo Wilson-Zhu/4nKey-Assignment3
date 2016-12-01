@@ -1,6 +1,6 @@
--- Part A --
+--Part A--
 
--- GENRE_T’s rows	--
+--GENRE_T’s rows--
 
 Insert into GENRE_T (GENREID,GENRE_NAME) values (1,'Drama'); 
 Insert into GENRE_T (GENREID,GENRE_NAME) values (2,'Crime'); 
@@ -24,7 +24,7 @@ Insert into GENRE_T (GENREID,GENRE_NAME) values (19,'Thriller');
 Insert into GENRE_T (GENREID,GENRE_NAME) values (20,'War'); 
 Insert into GENRE_T (GENREID,GENRE_NAME) values (21,'Western'); 
 
--- WATCHABLE_T’s rows --			
+--WATCHABLE_T’s rows--			
 
 Insert into WATCHABLE_T (WATCHABLEID,WATCHABLE_NAME,STORY,WATCHABLE_TYPE) values (1,'How I Met Your Mother','Ted recounts the events that led him to meeting their mother.','tvshow'); 
 Insert into WATCHABLE_T (WATCHABLEID,WATCHABLE_NAME,STORY,WATCHABLE_TYPE) values (2,'Friends','the show revolves around six 20-30 something friends living in Manhattan.','tvshow'); 
@@ -33,7 +33,7 @@ Insert into WATCHABLE_T (WATCHABLEID,WATCHABLE_NAME,STORY,WATCHABLE_TYPE) values
 Insert into WATCHABLE_T (WATCHABLEID,WATCHABLE_NAME,STORY,WATCHABLE_TYPE) values (5,'Finding Dory','Dory is a blue tang fish who suffers from memory loss every 10 seconds or so.','movie'); 
 Insert into WATCHABLE_T (WATCHABLEID,WATCHABLE_NAME,STORY,WATCHABLE_TYPE) values (6,'Batman v Superman','Convinced that Superman is now a threat to humanity, Batman tries to end his reig...','movie'); 
 
--- GENRE_WATCHABLE_T’s rows --
+--GENRE_WATCHABLE_T’s rows--
 
 Insert into GENRE_WATCHABLE_T (GENREID,WATCHABLEID) values (4,1); 
 Insert into GENRE_WATCHABLE_T (GENREID,WATCHABLEID) values (5,1); 
@@ -55,7 +55,7 @@ Insert into GENRE_WATCHABLE_T (GENREID,WATCHABLEID) values (3,6);
 Insert into GENRE_WATCHABLE_T (GENREID,WATCHABLEID) values (12,6); 
 Insert into GENRE_WATCHABLE_T (GENREID,WATCHABLEID) values (9,6); 
 
--- Part B --
+--Part B--
 
 --B1--
 
