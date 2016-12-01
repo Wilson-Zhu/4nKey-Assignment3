@@ -33,8 +33,6 @@ Insert into WATCHABLE_T (WATCHABLEID, NAME, STORY, WATCHABLE_TYPE) values (4, �
 Insert into WATCHABLE_T (WATCHABLEID, NAME, STORY, WATCHABLE_TYPE) values (5, ‘Finding Dory’, ‘Dory is a blue tang fish who suffers from memory loss every 10 seconds or so.’,’movie’); 
 Insert into WATCHABLE_T (WATCHABLEID, NAME, STORY, WATCHABLE_TYPE) values (6, ‘Batman v Superman’, ‘Convinced that Superman is now a threat to humanity, Batman tries to end his reign.’,’movie’); 
 
-ERRORS: NAME needs to be called WATCHABLE_NAME 
-
 -- Insert Rows for GENRE_WATCHABLE_T 
 
 Insert into GENRE_WATCHABLE_T (GENREID, WATCHABLEID) values (4,1);
@@ -66,10 +64,7 @@ FROM GENRE_T;
 
 B2. Return all genre names that start with “A”. 
 
-SELECT GENRE_NAME FROM GENRE_T 
-WHERE GENRE_NAME like ‘a%’;  
-ERROR: ‘a’ needs to be uppercase A 
-FIXED: SELECT GENRE_NAME FROM GENRE_T WHERE GENRE_NAME like 'A%';  
+SELECT GENRE_NAME FROM GENRE_T WHERE GENRE_NAME like 'A%';  
 
 B3. Return all movie names and their genres (no tv shows). Sort the rows based on movies' names. 
 
@@ -104,7 +99,6 @@ WHERE WATCHABLEID='Zootopia';
 
 SELECT GENRE_NAME FROM GENRE_T 
 JOIN GENRE_WATCHABLE_T ON GENRE_T.GENREID=GENRE_WATCHABLE_T.GENREID JOIN WATCHABLE_T ON GENRE_WATCHABLE_T.WATCHABLEID=WATCHABLE_T.WATCHABLEID WHERE WATCHABLE_NAME='ZOOTOPIA';
-ERROR: Needed another join 
 
 B7. How many movies or tv shows each genre has? The SQL statement should show that "Horror" and "Sport" have zero associated movies and tv shows. 
 
@@ -120,7 +114,6 @@ JOIN GENRE_WATCHABLE_T
 ON GENRE_T.GENREID=GENRE_WATCHABLE_T.GENREID LEFT 
 JOIN WATCHABLE_T
 ON GENRE_WATCHABLE_T.WATCHABLEID=WATCHABLE_T.WATCHABLEID; 
-ERROR: FORGOT: “GROUP BY GENRE_NAME;” at the end 
 
 B9. Show the names of all watchables (movies/tvshows) that belong to four or more genres. 
 
