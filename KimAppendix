@@ -1,3 +1,5 @@
+PART A
+
 -- Insert Rows for GENRE_T 
 
 Insert into GENRE_T (GENRE_ID, GENRE_NAME) values (‘1’, ‘Drama’)
