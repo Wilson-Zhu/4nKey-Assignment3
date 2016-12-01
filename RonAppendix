@@ -1,1 +1,134 @@
+-- Part A --
 
+-- GENRE_T’s rows				
+Insert into GENRE_T (GENREID,GENRE_NAME) values (1,'Drama'); 
+Insert into GENRE_T (GENREID,GENRE_NAME) values (2,'Crime'); 
+Insert into GENRE_T (GENREID,GENRE_NAME) values (3,'Action'); 
+Insert into GENRE_T (GENREID,GENRE_NAME) values (4,'Comedy'); 
+Insert into GENRE_T (GENREID,GENRE_NAME) values (5,'Sitcom'); 
+Insert into GENRE_T (GENREID,GENRE_NAME) values (6,'Romance'); 
+Insert into GENRE_T (GENREID,GENRE_NAME) values (7,'Goofy'); 
+Insert into GENRE_T (GENREID,GENRE_NAME) values (8,'Inspiring'); 
+Insert into GENRE_T (GENREID,GENRE_NAME) values (9,'Adventure'); 
+Insert into GENRE_T (GENREID,GENRE_NAME) values (10,'Children &' || 'Family'); 
+Insert into GENRE_T (GENREID,GENRE_NAME) values (11,'Imaganitive'); 
+Insert into GENRE_T (GENREID,GENRE_NAME) values (12,'Sci-' || 'Fi'); 
+Insert into GENRE_T (GENREID,GENRE_NAME) values (13,'Horror'); 
+Insert into GENRE_T (GENREID,GENRE_NAME) values (14,'Mystery'); 
+Insert into GENRE_T (GENREID,GENRE_NAME) values (15,'Musical'); 
+Insert into GENRE_T (GENREID,GENRE_NAME) values (16,'War'); 
+Insert into GENRE_T (GENREID,GENRE_NAME) values (17,'History'); 
+Insert into GENRE_T (GENREID,GENRE_NAME) values (18,'Biography'); 
+Insert into GENRE_T (GENREID,GENRE_NAME) values (19,'Thriller'); 
+Insert into GENRE_T (GENREID,GENRE_NAME) values (20,'War'); 
+Insert into GENRE_T (GENREID,GENRE_NAME) values (21,'Western'); 
+
+-- WATCHABLE_T’s rows				
+Insert into WATCHABLE_T (WATCHABLEID,WATCHABLE_NAME,STORY,WATCHABLE_TYPE) values (1,'How I Met Your Mother','Ted recounts the events that led him to meeting their mother.','tvshow'); 
+Insert into WATCHABLE_T (WATCHABLEID,WATCHABLE_NAME,STORY,WATCHABLE_TYPE) values (2,'Friends','the show revolves around six 20-30 something friends living in Manhattan.','tvshow'); 
+Insert into WATCHABLE_T (WATCHABLEID,WATCHABLE_NAME,STORY,WATCHABLE_TYPE) values (3,'Narco','The true story of Columbias infamously violent drug cartels','tvshow'); 
+Insert into WATCHABLE_T (WATCHABLEID,WATCHABLE_NAME,STORY,WATCHABLE_TYPE) values (4,'Zootopia','Zootopia is a mammal metropolis where various animals live and thrive.','movie'); 
+Insert into WATCHABLE_T (WATCHABLEID,WATCHABLE_NAME,STORY,WATCHABLE_TYPE) values (5,'Finding Dory','Dory is a blue tang fish who suffers from memory loss every 10 seconds or so.','movie'); 
+Insert into WATCHABLE_T (WATCHABLEID,WATCHABLE_NAME,STORY,WATCHABLE_TYPE) values (6,'Batman v Superman','Convinced that Superman is now a threat to humanity, Batman tries to end his reig...','movie'); 
+
+-- GENRE_WATCHABLE_T’s rows				
+Insert into GENRE_WATCHABLE_T (GENREID,WATCHABLEID) values (4,1); 
+Insert into GENRE_WATCHABLE_T (GENREID,WATCHABLEID) values (5,1); 
+Insert into GENRE_WATCHABLE_T (GENREID,WATCHABLEID) values (6,1); 
+Insert into GENRE_WATCHABLE_T (GENREID,WATCHABLEID) values (4,2); 
+Insert into GENRE_WATCHABLE_T (GENREID,WATCHABLEID) values (5,2); 
+Insert into GENRE_WATCHABLE_T (GENREID,WATCHABLEID) values (6,2); 
+Insert into GENRE_WATCHABLE_T (GENREID,WATCHABLEID) values (1,3); 
+Insert into GENRE_WATCHABLE_T (GENREID,WATCHABLEID) values (2,3); 
+Insert into GENRE_WATCHABLE_T (GENREID,WATCHABLEID) values (7,4); 
+Insert into GENRE_WATCHABLE_T (GENREID,WATCHABLEID) values (8,4); 
+Insert into GENRE_WATCHABLE_T (GENREID,WATCHABLEID) values (10,4); 
+Insert into GENRE_WATCHABLE_T (GENREID,WATCHABLEID) values (11,4); 
+Insert into GENRE_WATCHABLE_T (GENREID,WATCHABLEID) values (7,5); 
+Insert into GENRE_WATCHABLE_T (GENREID,WATCHABLEID) values (9,5); 
+Insert into GENRE_WATCHABLE_T (GENREID,WATCHABLEID) values (10,5); 
+Insert into GENRE_WATCHABLE_T (GENREID,WATCHABLEID) values (11,5); 
+Insert into GENRE_WATCHABLE_T (GENREID,WATCHABLEID) values (3,6); 
+Insert into GENRE_WATCHABLE_T (GENREID,WATCHABLEID) values (12,6); 
+Insert into GENRE_WATCHABLE_T (GENREID,WATCHABLEID) values (9,6); 
+
+-- Part B --
+
+-- B1 Return all genre names --
+
+SELECT GENRE_NAME FROM GENRE_T;
+
+-- B2 Return all genre names that start with “A”. --
+
+SELECT GENRE_NAME FROM GENRE_T WHERE GENRE_NAME like 'A%';
+
+-- B3 Return all movie names and their genres (no tv shows). Sort the rows based on movies' names. --
+
+SELECT WATCHABLE_NAME, GENRE_NAME FROM GENRE_T JOIN GENRE_WATCHABLE_T ON GENRE_T.GENREID=GENRE_WATCHABLE_T.GENREID JOIN WATCHABLE_T ON GENRE_WATCHABLE_T.WATCHABLEID=WATCHABLE_T.WATCHABLEID WHERE WATCHABLE_TYPE='movie' ORDER BY WATCHABLE_NAME;
+
+-- B4 Return the number of tv shows exist in our database. --
+
+SELECT COUNT(*) AS CNT FROM WATCHABLE_T WHERE WATCHABLE_TYPE='tvshow';
+
+-- B5 Return the number of movies and tv shows exist in our database in the format shown in the result table. --
+
+SELECT 'Number of Movies' AS TITLE, COUNT(*) AS CNT FROM WATCHABLE_T WHERE WATCHABLE_TYPE='movie'
+UNION 
+SELECT 'Number of TV Shows' AS TITLE, COUNT(*) AS CNT FROM WATCHABLE_T WHERE WATCHABLE_TYPE='tvshow'; 
+
+-- B6 Return genres the movie Zootopia belong to. --
+
+SELECT GENRE_NAME FROM 
+GENRE_T JOIN GENRE_WATCHABLE_T ON 
+GENRE_T.GENREID=GENRE_WATCHABLE_T.GENREID 
+JOIN WATCHABLE_T ON 
+GENRE_WATCHABLE_T.WATCHABLEID=WATCHABLE_T.WATCHABLEID WHERE 
+WATCHABLE_NAME='Zootopia';
+
+-- B7 How many movies or tv shows each genre has? The SQL statement should show that "Horror" and "Sport" have zero associated movies and tv shows. --
+
+SELECT GENRE_NAME, count(WATCHABLE_T.WATCHABLEID) AS CNT
+FROM GENRE_T LEFT JOIN GENRE_WATCHABLE_T 
+ON GENRE_T.GENREID=GENRE_WATCHABLE_T.GENREID LEFT JOIN WATCHABLE_T
+ON GENRE_WATCHABLE_T.WATCHABLEID=WATCHABLE_T.WATCHABLEID
+GROUP BY GENRE_NAME;
+-- Error: Displays as two tables
+
+-- B8 What is the average of the number of movies/tv shows a genre has? --
+
+SELECT AVG(COUNT(WATCHABLE_T.WATCHABLEID)) AS AVERAGE
+FROM GENRE_T LEFT JOIN GENRE_WATCHABLE_T 
+ON GENRE_T.GENREID=GENRE_WATCHABLE_T.GENREID LEFT JOIN WATCHABLE_T
+ON GENRE_WATCHABLE_T.WATCHABLEID=WATCHABLE_T.WATCHABLEID
+GROUP BY GENRE_NAME;
+
+-- B9 Show the names of all watchables (movies/tvshows) that belong to four or more genres. --
+
+--SELECT WATCHABLE_NAME FROM
+ --WATCHABLE_T JOIN GENRE_WATCHABLE_T ON
+-- WATCHABLE_T.WATCHABLEID=GENRE_WATCHABLE_T.WATCHABLEID JOIN GENRE_T ON
+-- GENRE_WATCHABLE_T.GENREID=GENRE_T.GENREID GROUP BY WATCHABLE_NAME
+-- HAVING count(GENRE_T.GENREID)>3;
+--Error: Has unnecessary second Join into GENRE_T when same data can be pulled from GENRE_WATCHABLE_T
+
+--FIXED:
+SELECT WATCHABLE_NAME FROM
+ WATCHABLE_T JOIN GENRE_WATCHABLE_T ON
+ WATCHABLE_T.WATCHABLEID=GENRE_WATCHABLE_T.WATCHABLEID GROUP BY WATCHABLE_NAME
+ HAVING count(GENRE_WATCHABLE_T.GENREID)>3;
+
+-- B10 Show the genre ids that are associated with WatchableID 4 (i.e. "Zootopia") but are not associated with WatchableID 5 (i.e. "Finding Dory"). Use subquery. --
+
+SELECT GENREID FROM GENRE_WATCHABLE_T
+WHERE GENRE_WATCHABLE_T.WATCHABLEID=4 MINUS
+(SELECT GENREID FROM GENRE_WATCHABLE_T
+WHERE GENRE_WATCHABLE_T.WATCHABLEID=5);
+ERROR: Does not use subquery
+
+SELECT GENREID
+IN        (SELECT GENREID
+FROM GENRE_WATCHABLE_T
+            WHERE GENRE_WATCHABLE_T.WATCHABLEID!=5)
+FROM GENRE_WATCHABLE_T
+WHERE GENRE_WATCHABLE_T.WATCHABLEID=4
+;
